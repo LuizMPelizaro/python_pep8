@@ -1,4 +1,8 @@
-class FilaBase:
+import abc
+
+
+# O metodo abc é uma classe abstrata
+class FilaBase(metaclass=abc.ABCMeta):
     codigo: int = 0
     fila = []
     clientes_atendido = []
@@ -10,7 +14,15 @@ class FilaBase:
         else:
             self.codigo += 1
 
-    def chama_cliente(self, caixa: int) -> str:
-        cliente_atual = self.fila.pop(0)
-        self.clientes_atendido.append(cliente_atual)
-        return f'Cliente atual: {cliente_atual}, dirija-se ao caixa: {caixa}'
+    # Isso força com que a classe filha crie esse metodo
+    @abc.abstractmethod
+    def gera_senha_atual(self):
+        ...
+
+    @abc.abstractmethod
+    def atualiza_fila(self):
+        ...
+
+    @abc.abstractmethod
+    def chama_cliente(self, caixa: int):
+        ...
