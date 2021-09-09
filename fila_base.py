@@ -14,13 +14,17 @@ class FilaBase(metaclass=abc.ABCMeta):
         else:
             self.codigo += 1
 
+    def insere_na_fila(self):
+        self.fila.append(self.senha_atual)
+
+    def atualiza_fila(self):
+        self.reseta_fila()
+        self.gera_senha_atual()
+        self.insere_na_fila()
+
     # Isso força com que a classe filha crie esse metodo
     @abc.abstractmethod
     def gera_senha_atual(self):
-        ...
-
-    @abc.abstractmethod
-    def atualiza_fila(self):
         ...
 
     @abc.abstractmethod
