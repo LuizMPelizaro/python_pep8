@@ -1,16 +1,18 @@
 import abc
+from typing import List
+from constantes import TAMANHO_MAXIMO_PADRAO, TAMANHO_MINIMO_PADRAO
 
 
 # O metodo abc é uma classe abstrata
 class FilaBase(metaclass=abc.ABCMeta):
     codigo: int = 0
-    fila = []
-    clientes_atendido = []
+    fila: List[str] = []
+    clientes_atendido: List[str] = []
     senha_atual: str = ""
 
     def reseta_fila(self) -> None:
-        if self.codigo >= 200:
-            self.codigo = 0
+        if self.codigo >= TAMANHO_MAXIMO_PADRAO:
+            self.codigo = TAMANHO_MINIMO_PADRAO
         else:
             self.codigo += 1
 
