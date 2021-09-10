@@ -1,4 +1,5 @@
 from fabrica_de_fila import FabricaDeFila
+from estatistica_detalhada import EstatisticaDetalhada
 
 # fila_teste_2 = FilaPrioritaria()
 # fila_teste_2.atualiza_fila()
@@ -13,8 +14,10 @@ from fabrica_de_fila import FabricaDeFila
 # fila_teste.atualiza_fila()
 # print(fila_teste.chama_cliente(5))
 
-fila = FabricaDeFila.pega_fila('normal')
+fila = FabricaDeFila.pega_fila('prioritaria')
+fila.atualiza_fila()
 fila.atualiza_fila()
 fila.atualiza_fila()
 fila.atualiza_fila()
 print(fila.chama_cliente(5))
+print(fila.estatistica(EstatisticaDetalhada('10/03/2000', 120)))

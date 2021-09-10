@@ -1,8 +1,12 @@
-from typing import Dict, List, Union
+from typing import Dict, Union
 
 from fila_base import FilaBase
 
 from constantes import CODIGO_PRIORITARIO
+from estatistica_detalhada import EstatisticaDetalhada
+from estatistica_resumida import EstatisticaResumida
+
+Classes = Union[EstatisticaResumida, EstatisticaDetalhada]
 
 
 class FilaPrioritaria(FilaBase):
@@ -16,15 +20,5 @@ class FilaPrioritaria(FilaBase):
         self.clientes_atendido.append(cliente_atual)
         return f'Cliente atual: {cliente_atual}, dirija-se ao caixa: {caixa}'
 
-    def estatistica(self, dia: str, agencia: int, flag: str):
-        estatistica: Dict[str, Union[List[str], str, int]] = {}
-        if flag != 'detail':
-            estatistica[f'{agencia}-{dia}'] = len(self.clientes_atendido)
-        else:
-            estatistica['dia'] = dia
-            estatistica['agencia'] = agencia
-            estatistica['clientes_atentididos'] = self.clientes_atendido
-            estatistica['quantidade_cliete_atendido'] = (
-                len(self.clientes_atendido)
-            )
-        return estatistica
+    def estatistica(self, retorna_estatistica: Classes) -> Dict:
+        return retorna_estatistica.roda_estatistica(self.clientes_atendido)
